@@ -32,7 +32,7 @@ photoController.get('/:photoId/details', async(req, res)=>{
   const photoId = req.params.photoId;
   const photo = await photoService.getOne(photoId).populate('comments.user').lean();
   const isOwner =  req.user?.id == photo.owner._id;
-  console.log(photo)
+  
   res.render('photos/details', {photo, isOwner})
 });
 

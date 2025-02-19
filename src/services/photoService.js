@@ -15,10 +15,12 @@ export const addComment = async (photoId, commentData)=> {
   const photo = await Photo.findById(photoId)
 
   photo.comments.push(commentData)
-  
+
   return photo.save()
 
-}
+};
+
+export const getByOwner = (userId)=> Photo.find({owner: userId})
 
 const photoService = {
   getAll,
@@ -27,6 +29,7 @@ const photoService = {
   remove,
   edit,
   addComment,
+  getByOwner,
 };
 
 export default photoService;
