@@ -77,9 +77,11 @@
                         </div>
                         <div class="comments">
                             <div class="comments-top">
-                                <div class="userDetails">
-                                 
-                                </div>
+                                
+                                 {{#each photo.comments}}
+                                 {{> comment}}
+                                
+                                {{/each}}
                              
                             </div>
                         </div>

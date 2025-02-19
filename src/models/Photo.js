@@ -27,9 +27,10 @@ const photoShema = new Schema({
   },
   comments:[
     {
-      userId: {
+      user: {
         type: Types.ObjectId,
         required: true,
+        ref: "User",
       },
       comment: {
           type: String,

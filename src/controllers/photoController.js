@@ -30,8 +30,9 @@ photoController.post("/create", isAuth, async (req, res) => {
 
 photoController.get('/:photoId/details', async(req, res)=>{
   const photoId = req.params.photoId;
-  const photo = await photoService.getOne(photoId).lean();
+  const photo = await photoService.getOne(photoId).populate('comments.user').lean();
   const isOwner =  req.user?.id == photo.owner._id;
+  console.log(photo)
   res.render('photos/details', {photo, isOwner})
 });
 
@@ -68,9 +69,9 @@ const photoData = req.body;
 photoController.post('/:photoId/comments', async(req, res)=>{
   const photoId = req.params.photoId;
  const {comment} = req.body;
- const userId = req.user.id;
+ const user = req.user.id;
 
- await photoService.addComment(photoId, {userId, comment})
+ await photoService.addComment(photoId, {user, comment})
   res.redirect(`/photos/${photoId}/details`)
 })
 
