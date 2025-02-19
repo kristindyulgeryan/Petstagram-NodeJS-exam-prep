@@ -28,10 +28,23 @@ photoController.post("/create", isAuth, async (req, res) => {
   }
 });
 
-photoController.get('/:photoId', async(req, res)=>{
-  const photoId = req.params.photoId
-  const photo = await photoService.getOne(photoId).lean()
-  res.render('photos/details', {photo})
+photoController.get('/:photoId/details', async(req, res)=>{
+  const photoId = req.params.photoId;
+  const photo = await photoService.getOne(photoId).lean();
+  const isOwner =  req.user?.id == photo.owner._id;
+  res.render('photos/details', {photo, isOwner})
+});
+
+photoController.get('/:photoId/delete', isAuth, async(req, res)=>{
+const photoId = req.params.photoId
+  try {
+    await photoService.remove(photoId)
+
+    res.redirect("/photos/catalog")
+  } catch (err) {
+    res.render("photos/details", {error: 'Unsuccessful deletion'})
+  }
+  
 })
 
 export default photoController;

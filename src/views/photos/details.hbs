@@ -27,11 +27,13 @@
                                 <!-- Link to User Profile Details Page -->
                                 <p>
                                     <!-- User's username -->
-                                    MayaM
+                                   {{photo.owner.username}}
                                 </p>
                                 <!-- photo's location -->
-                                <span>Bansko, Bulgaria</span>
+                                <span>{{photo.location}}</span>
 
+
+                            {{#if isOwner}}
                                 <!-- IF the viewer is the creator of the photo -->
                                 <div class="edit-delete-btns">
 
@@ -42,10 +44,11 @@
                                     </a>
 
                                     <!--Delete Pet Photo -->
-                                    <a href="#">
+                                    <a href="/photos/{{photo.id}}/delete">
                                         <img class="bin-img" src="/static/images/icon-remove-22.jpg" alt="bin button">
                                     </a>
                                 </div>
+                                {{/if}}
 
                             </h3>
                         </div>
@@ -55,7 +58,7 @@
                     <!-- Start Pet Photo -->
                     <div class="imgBx">
                         <!-- Pet Photo -->
-                        <img src="/static/images/axolotl.jpeg" alt="post" class="cover">
+                        <img src="{{photo.image}}" alt="{{photo.name}}" class="cover">
                     </div>
 
 
@@ -63,14 +66,14 @@
                     <div class="bottom">
 
                         <p class="message">
-                            <b class="petDescription">This is my pet!</b>
+                            <b class="petDescription">{{photo.description}}</b>
                         </p>
 
 
                         <!-- Photo description -->
                         <div class="pet-details">
-                            <p class="petName">Name: Sal</p>
-                            <p class="petAge">Age: 4</p>
+                            <p class="petName">Name: {{photo.name}}</p>
+                            <p class="petAge">Age: {{photo.age}}</p>
                         </div>
                         <div class="comments">
                             <div class="comments-top">
@@ -122,6 +125,8 @@
                             </div>
                         </div>
                     </div>
+                    {{#if isAuthenticated}}
+                    {{#unless isOwner}}
                     <div class="addComments">
                         <!-- Start Add Comments Form -->
                         <form method="#" action="#">
@@ -131,6 +136,8 @@
                             <button type="submit">Post</button>
                         </form>
                     </div>
+                    {{/unless}}
+                    {{/if}}
                 </div>
             </div>
         </div>

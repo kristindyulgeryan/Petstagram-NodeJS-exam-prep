@@ -13,6 +13,7 @@ export const auth = async (req, res, next) => {
 
     req.user = decodedToken;
     res.locals.user = decodedToken;
+    res.locals.isAuthenticated = true;
   } catch (err) {
     res.clearCookie(AUTH_COOKIE_NAME);
     return res.redirect("/auth/login");
