@@ -2,8 +2,10 @@ import Photo from "../models/Photo.js";
 
 export const getAll = () => Photo.find({}).populate("owner");
 
-export const create = (photoData, userId) =>
-  Photo.create({ ...photoData, owner: userId });
+export  const getOne =(photoId)=> Photo.findById(photoId)
+
+export const create = (photoData) =>
+  Photo.create(photoData);
 
 const photoService = {
   getAll,

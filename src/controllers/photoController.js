@@ -15,18 +15,23 @@ photoController.get("/create", (req, res) => {
 });
 
 photoController.post("/create", isAuth, async (req, res) => {
-  const photoData = req.body;
-  const userId = req.user.id;
+  const photoData = {...req.body, owner: req.user.id};
+ 
   try {
-    await photoService.create(photoData, userId);
+    await photoService.create(photoData);
 
     res.redirect("/photos/catalog");
   } catch (err) {
     res.render("photos/create", {
       error: getErrorMessage(err),
-      photo: photoData,
     });
   }
 });
+
+photoController.get('/:photoId', async(req, res)=>{
+  const photoId = req.params.photoId
+  const photo = await photoService.getOne(photoId).lean()
+  res.render('photos/details', {photo})
+})
 
 export default photoController;
