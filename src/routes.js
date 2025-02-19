@@ -8,5 +8,8 @@ const routes = Router();
 routes.use(homeController);
 routes.use("/auth", authController);
 routes.use("/photos", photoController);
+routes.get('*', (req, res)=>{
+    res.redirect('/404')
+})
 
 export default routes;
