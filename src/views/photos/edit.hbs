@@ -6,7 +6,7 @@
         <div class="editPage">
             <h2>Edit photo</h2>
             <!-- Start Add Photo Form -->
-            <form action="">
+            <form method='POST'>
                 <p>
                     <input type="text" name="name" placeholder="Name" value="{{photo.name}}">
                 </p>
@@ -24,7 +24,7 @@
                 </p>
 
                 <p>
-                    <input type="text" name="image" placeholder="Link to image" value="{{photo.iamge}}">
+                    <input type="text" name="image" placeholder="Link to image" value="{{photo.image}}">
                 </p>
                 <!-- Add Photo Button -->
                 <button class="edit-btn" type="submit">Edit Photo</button>

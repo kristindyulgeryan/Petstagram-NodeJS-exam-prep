@@ -45,6 +45,24 @@ const photoId = req.params.photoId
     res.render("photos/details", {error: 'Unsuccessful deletion'})
   }
   
+});
+
+photoController.get('/:photoId/edit', async(req, res)=>{
+  const photo = await photoService.getOne(req.params.photoId).lean()
+  res.render('photos/edit', {photo})
+});
+
+photoController.post('/:photoId/edit',async(req, res)=>{
+  const photoId = req.params.photoId
+const photoData = req.body;
+  try {
+    
+    await photoService.edit(photoId, photoData);
+    res.redirect(`/photos/${photoId}/details`)
+  } catch (err) {
+    res.render('photos/edit', {error: 'Unable to update photo', ...photoData})
+  }
+ 
 })
 
 export default photoController;

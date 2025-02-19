@@ -7,12 +7,15 @@ export  const getOne =(photoId)=> Photo.findById(photoId).populate("owner")
 export const create = (photoData) =>
   Photo.create(photoData);
 
-export const remove = (photoId)=> Photo.findByIdAndDelete(photoId)
+export const remove = (photoId)=> Photo.findByIdAndDelete(photoId);
+
+export const edit =(photoId, photoData)=>Photo.findByIdAndUpdate(photoId, photoData)
 const photoService = {
   getAll,
   getOne,
   create,
   remove,
+  edit,
 };
 
 export default photoService;
