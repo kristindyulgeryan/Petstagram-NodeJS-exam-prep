@@ -9,7 +9,7 @@ const photoShema = new Schema({
   image: {
     type: String,
     required: [true, "Image is required"],
-    match: /^https?:\/\//,
+    match: [/^https?:\/\//, "Image must be a valid URL"],
   },
   age: {
     type: Number,
