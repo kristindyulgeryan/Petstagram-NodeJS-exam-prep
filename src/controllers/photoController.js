@@ -63,6 +63,15 @@ const photoData = req.body;
     res.render('photos/edit', {error: 'Unable to update photo', ...photoData})
   }
  
+});
+
+photoController.post('/:photoId/comments', async(req, res)=>{
+  const photoId = req.params.photoId;
+ const {comment} = req.body;
+ const userId = req.user.id;
+
+ await photoService.addComment(photoId, {userId, comment})
+  res.redirect(`/photos/${photoId}/details`)
 })
 
 export default photoController;
