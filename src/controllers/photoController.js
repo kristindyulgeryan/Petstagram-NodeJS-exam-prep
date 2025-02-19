@@ -10,7 +10,7 @@ photoController.get("/catalog", async (req, res) => {
   res.render("photos/catalog", { photos });
 });
 
-photoController.get("/create", (req, res) => {
+photoController.get("/create", isAuth, (req, res) => {
   res.render("photos/create");
 });
 
@@ -48,12 +48,12 @@ const photoId = req.params.photoId
   
 });
 
-photoController.get('/:photoId/edit', async(req, res)=>{
+photoController.get('/:photoId/edit', isAuth, async(req, res)=>{
   const photo = await photoService.getOne(req.params.photoId).lean()
   res.render('photos/edit', {photo})
 });
 
-photoController.post('/:photoId/edit',async(req, res)=>{
+photoController.post('/:photoId/edit', isAuth, async(req, res)=>{
   const photoId = req.params.photoId
 const photoData = req.body;
   try {
@@ -66,7 +66,7 @@ const photoData = req.body;
  
 });
 
-photoController.post('/:photoId/comments', async(req, res)=>{
+photoController.post('/:photoId/comments', isAuth,  async(req, res)=>{
   const photoId = req.params.photoId;
  const {comment} = req.body;
  const user = req.user.id;
