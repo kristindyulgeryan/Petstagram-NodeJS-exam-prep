@@ -25,6 +25,18 @@ const photoShema = new Schema({
     type: Types.ObjectId,
     ref: "User",
   },
+  commentList:[
+    {
+      userId: {
+        type:Types.ObjectId,
+        requried: true
+      },
+      comment: {
+          type: String,
+          required: [true, "Comment is required"],
+        }
+      },
+]
 });
 
 const Photo = model("Photo", photoShema);
